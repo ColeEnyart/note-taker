@@ -23,9 +23,9 @@ app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, './public/notes.html'))
 );
 
-/* app.get('*', (req, res) =>
+app.get('*', (req, res) =>
     res.sendFile(path.join(__dirname, './public/index.html'))
-); */
+);
 
 app.get('/api/notes', (req, res) => {
     res.json(globalData);
@@ -44,8 +44,19 @@ app.post('/api/notes', (req, res) => {
         console.log('line 38 ' + JSON.stringify(globalData))
     );
 
-    res.json(globalData)
+    res.json(globalData);
 });
+
+app.delete('/api/notes/:id', (req, res) => {
+    let toDeleteId = req.params.id;
+    globalData = globalData.filter(note => note.id != toDeleteId);
+  
+    fs.writeFile('./db/db.json', JSON.stringify(globalData), (err) =>{
+      err ? console.error(err) : console.log('Success!')}
+    );
+  
+    res.json(globalData);
+  })
 
 app.listen(PORT, () =>
     console.log(`App listening at http://localhost:${PORT} 🚀`)
