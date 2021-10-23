@@ -11,4 +11,4 @@ Uses:
 
 ## Screenshot
 
-<img src="./assets/images/" width="800" />
+<img src="./public/assets/images/note-taker.png" width="800" />
