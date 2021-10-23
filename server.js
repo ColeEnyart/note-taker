@@ -28,8 +28,7 @@ app.get('*', (req, res) =>
 );
 
 app.get('/api/notes', (req, res) => {
-    res.json(globalData);
-    console.log('line 32 ' + JSON.stringify(globalData));
+    res.status(200).json(globalData);
 });
 
 app.post('/api/notes', (req, res) => {
@@ -40,9 +39,7 @@ app.post('/api/notes', (req, res) => {
 
     fs.writeFile('./db/db.json', JSON.stringify(globalData), (err) => {
         err ? console.error(err) : console.log('Success!')
-    },
-        console.log('line 38 ' + JSON.stringify(globalData))
-    );
+    });
 
     res.json(globalData);
 });
@@ -55,7 +52,7 @@ app.delete('/api/notes/:id', (req, res) => {
       err ? console.error(err) : console.log('Success!')}
     );
   
-    res.json(globalData);
+    res.status(200).json(globalData);
   })
 
 app.listen(PORT, () =>
